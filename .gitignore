@@ -1,1 +1,4 @@
-vagrant/.vagrant/machines
+
+vagrant/.vagrant
+
+.directory
