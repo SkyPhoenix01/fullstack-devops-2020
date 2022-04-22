@@ -1,30 +1,17 @@
-import chai from 'chai';
-import {
-    cmyk2hexTestData,
-    cmyk2hslTestData,
-    cmyk2rgbTestData,
-    hex2cmykTestData,
-    hex2hslTestData,
-    hex2rgbTestData,
-    hsl2cmykTestData,
-    hsl2hexTestData,
-    hsl2rgbTestData,
-    rgb2cmykTestData,
-    rgb2hexTestData,
-    rgb2hslTestData
-} from './colors';
-import colorConverter from "color-convert";
-import {CMYK, HSL, RGB} from "color-convert/conversions";
-import {TtfCmyk, TtfHsl} from '../model/Color';
-
-chai.config.includeStack = true;
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const chai_1 = __importDefault(require("chai"));
+const colors_1 = require("./colors");
+const color_convert_1 = __importDefault(require("color-convert"));
+chai_1.default.config.includeStack = true;
 // const should = chai.should();
-
 describe('Color Converter rgb2hex', () => {
-
-    hex2rgbTestData.forEach((test) => {
+    colors_1.hex2rgbTestData.forEach((test) => {
         it(`convert ${JSON.stringify(test.hexValue)} to ${JSON.stringify(test.rgbValue)}`, () => {
-            const converted = colorConverter.hex.rgb(test.hexValue.hex);
+            const converted = color_convert_1.default.hex.rgb(test.hexValue.hex);
             const rgb = {
                 red: converted[0],
                 green: converted[1],
@@ -33,11 +20,10 @@ describe('Color Converter rgb2hex', () => {
             rgb.should.deep.equals(test.rgbValue);
         });
     });
-
-    hex2hslTestData.forEach((test) => {
+    colors_1.hex2hslTestData.forEach((test) => {
         it(`convert ${JSON.stringify(test.hexValue)} to ${JSON.stringify(test.hslValue)}`, () => {
-            const converted = colorConverter.hex.hsl(test.hexValue.hex);
-            const hsl: TtfHsl = {
+            const converted = color_convert_1.default.hex.hsl(test.hexValue.hex);
+            const hsl = {
                 hue: converted[0],
                 saturation: converted[1],
                 lightness: converted[2]
@@ -45,11 +31,10 @@ describe('Color Converter rgb2hex', () => {
             hsl.should.deep.equals(test.hslValue);
         });
     });
-
-    hex2cmykTestData.forEach((test) => {
+    colors_1.hex2cmykTestData.forEach((test) => {
         it(`convert ${JSON.stringify(test.hexValue)} to ${JSON.stringify(test.cmykValue)}`, () => {
-            const converted = colorConverter.hex.cmyk(test.hexValue.hex);
-            const cmyk: TtfCmyk = {
+            const converted = color_convert_1.default.hex.cmyk(test.hexValue.hex);
+            const cmyk = {
                 cyan: converted[0],
                 magenta: converted[1],
                 yellow: converted[2],
@@ -58,27 +43,25 @@ describe('Color Converter rgb2hex', () => {
             cmyk.should.deep.equals(test.cmykValue);
         });
     });
-
-    rgb2hexTestData.forEach((test) => {
+    colors_1.rgb2hexTestData.forEach((test) => {
         it(`convert ${JSON.stringify(test.rgbValue)} to ${JSON.stringify(test.hexValue)}`, () => {
-            const toConvert: RGB = [
+            const toConvert = [
                 test.rgbValue.red,
                 test.rgbValue.green,
                 test.rgbValue.blue
             ];
-            colorConverter.rgb.hex(toConvert).should.deep.equals(test.hexValue.hex);
+            color_convert_1.default.rgb.hex(toConvert).should.deep.equals(test.hexValue.hex);
         });
     });
-
-    rgb2hslTestData.forEach((test) => {
+    colors_1.rgb2hslTestData.forEach((test) => {
         it(`convert ${JSON.stringify(test.rgbValue)} to ${JSON.stringify(test.hslValue)}`, () => {
-            const toConvert: RGB = [
+            const toConvert = [
                 test.rgbValue.red,
                 test.rgbValue.green,
                 test.rgbValue.blue
-            ] as RGB;
-            const converted = colorConverter.rgb.hsl(toConvert);
-            const hsl: TtfHsl = {
+            ];
+            const converted = color_convert_1.default.rgb.hsl(toConvert);
+            const hsl = {
                 hue: converted[0],
                 saturation: converted[1],
                 lightness: converted[2]
@@ -86,16 +69,15 @@ describe('Color Converter rgb2hex', () => {
             hsl.should.deep.equals(test.hslValue);
         });
     });
-
-    rgb2cmykTestData.forEach((test) => {
+    colors_1.rgb2cmykTestData.forEach((test) => {
         it(`convert ${JSON.stringify(test.rgbValue)} to ${JSON.stringify(test.cmykValue)}`, () => {
-            const toConvert: RGB = [
+            const toConvert = [
                 test.rgbValue.red,
                 test.rgbValue.green,
                 test.rgbValue.blue
-            ] as RGB;
-            const converted = colorConverter.rgb.cmyk(toConvert);
-            const cmyk: TtfCmyk = {
+            ];
+            const converted = color_convert_1.default.rgb.cmyk(toConvert);
+            const cmyk = {
                 cyan: converted[0],
                 magenta: converted[1],
                 yellow: converted[2],
@@ -104,26 +86,24 @@ describe('Color Converter rgb2hex', () => {
             cmyk.should.deep.equals(test.cmykValue);
         });
     });
-
-    hsl2hexTestData.forEach((test) => {
+    colors_1.hsl2hexTestData.forEach((test) => {
         it(`convert ${JSON.stringify(test.hslValue)} to ${JSON.stringify(test.hexValue)}`, () => {
-            const toConvert: HSL = [
+            const toConvert = [
                 test.hslValue.hue,
                 test.hslValue.saturation,
                 test.hslValue.lightness
             ];
-            colorConverter.hsl.hex(toConvert).should.deep.equals(test.hexValue.hex);
+            color_convert_1.default.hsl.hex(toConvert).should.deep.equals(test.hexValue.hex);
         });
     });
-
-    hsl2rgbTestData.forEach((test) => {
+    colors_1.hsl2rgbTestData.forEach((test) => {
         it(`convert ${JSON.stringify(test.hslValue)} to ${JSON.stringify(test.hslValue)}`, () => {
-            const toConvert: HSL = [
+            const toConvert = [
                 test.hslValue.hue,
                 test.hslValue.saturation,
                 test.hslValue.lightness
             ];
-            const converted = colorConverter.hsl.rgb(toConvert);
+            const converted = color_convert_1.default.hsl.rgb(toConvert);
             const rgb = {
                 red: converted[0],
                 green: converted[1],
@@ -132,16 +112,15 @@ describe('Color Converter rgb2hex', () => {
             rgb.should.deep.equals(test.rgbValue);
         });
     });
-
-    hsl2cmykTestData.forEach((test) => {
+    colors_1.hsl2cmykTestData.forEach((test) => {
         it(`convert ${JSON.stringify(test.hslValue)} to ${JSON.stringify(test.cmykValue)}`, () => {
-            const toConvert: HSL = [
+            const toConvert = [
                 test.hslValue.hue,
                 test.hslValue.saturation,
                 test.hslValue.lightness
-            ] as HSL;
-            const converted = colorConverter.hsl.cmyk(toConvert);
-            const cmyk: TtfCmyk = {
+            ];
+            const converted = color_convert_1.default.hsl.cmyk(toConvert);
+            const cmyk = {
                 cyan: converted[0],
                 magenta: converted[1],
                 yellow: converted[2],
@@ -150,28 +129,26 @@ describe('Color Converter rgb2hex', () => {
             cmyk.should.deep.equals(test.cmykValue);
         });
     });
-
-    cmyk2hexTestData.forEach((test) => {
+    colors_1.cmyk2hexTestData.forEach((test) => {
         it(`convert ${JSON.stringify(test.cmykValue)} to ${JSON.stringify(test.hexValue)}`, () => {
-            const toConvert: CMYK = [
+            const toConvert = [
                 test.cmykValue.cyan,
                 test.cmykValue.magenta,
                 test.cmykValue.yellow,
                 test.cmykValue.black
             ];
-            colorConverter.cmyk.hex(toConvert).should.deep.equals(test.hexValue.hex);
+            color_convert_1.default.cmyk.hex(toConvert).should.deep.equals(test.hexValue.hex);
         });
     });
-
-    cmyk2rgbTestData.forEach((test) => {
+    colors_1.cmyk2rgbTestData.forEach((test) => {
         it(`convert ${JSON.stringify(test.cmykValue)} to ${JSON.stringify(test.rgbValue)}`, () => {
-            const toConvert: CMYK = [
+            const toConvert = [
                 test.cmykValue.cyan,
                 test.cmykValue.magenta,
                 test.cmykValue.yellow,
                 test.cmykValue.black
             ];
-            const converted = colorConverter.cmyk.rgb(toConvert);
+            const converted = color_convert_1.default.cmyk.rgb(toConvert);
             const rgb = {
                 red: converted[0],
                 green: converted[1],
@@ -180,17 +157,16 @@ describe('Color Converter rgb2hex', () => {
             rgb.should.deep.equals(test.rgbValue);
         });
     });
-
-    cmyk2hslTestData.forEach((test) => {
+    colors_1.cmyk2hslTestData.forEach((test) => {
         it(`convert ${JSON.stringify(test.cmykValue)} to ${JSON.stringify(test.hslValue)}`, () => {
-            const toConvert: CMYK = [
+            const toConvert = [
                 test.cmykValue.cyan,
                 test.cmykValue.magenta,
                 test.cmykValue.yellow,
                 test.cmykValue.black
             ];
-            const converted = colorConverter.cmyk.hsl(toConvert);
-            const hsl: TtfHsl = {
+            const converted = color_convert_1.default.cmyk.hsl(toConvert);
+            const hsl = {
                 hue: converted[0],
                 saturation: converted[1],
                 lightness: converted[2]
@@ -198,5 +174,5 @@ describe('Color Converter rgb2hex', () => {
             hsl.should.deep.equals(test.hslValue);
         });
     });
-
 });
+//# sourceMappingURL=colors.test.js.map

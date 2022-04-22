@@ -10,6 +10,126 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
+  cmyk2hex:
+    build: ./src/service/cmyk2hex/
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.router.cmyk2hex.rule=PathPrefix(`/cmyk2hex`)"
+      - "traefik.http.router.cmyk2hex.middlewares=cmyk2hex-sptipperfix"
+      - "traefik.http.router.cmyk2hex.loadbalancer.server.port=3000"
+      - "traefik.http.router.cmyk2hex-stripprefix.stripprefix.prefix=`/cmyk2hex`"
+
+  cmyk2hsl:
+    build: ./src/service/cmyk2hsl/
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.router.cmyk2hsl.rule=PathPrefix(`/cmyk2hsl`)"
+      - "traefik.http.router.cmyk2hsl.middlewares=cmyk2hsl-sptipperfix"
+      - "traefik.http.router.cmyk2hsl.loadbalancer.server.port=3000"
+      - "traefik.http.router.cmyk2hsl-stripprefix.stripprefix.prefix=`/cmyk2hsl`"
+    
+  cmyk2rgb:
+    build: ./src/service/cmyk2rgb/
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.router.cmyk2rgb.rule=PathPrefix(`/cmyk2rgb`)"
+      - "traefik.http.router.cmyk2rgb.middlewares=cmyk2rgb-sptipperfix"
+      - "traefik.http.router.cmyk2rgb.loadbalancer.server.port=3000"
+      - "traefik.http.router.cmyk2rgb-stripprefix.stripprefix.prefix=`/cmyk2rgb`"
+
+  hex2cmyk:
+    build: ./src/service/hex2cmyk/
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.router.hex2cmyk.rule=PathPrefix(`/hex2cmyk`)"
+      - "traefik.http.router.hex2cmyk.middlewares=hex2cmyk-sptipperfix"
+      - "traefik.http.router.hex2cmyk.loadbalancer.server.port=3000"
+      - "traefik.http.router.hex2cmyk-stripprefix.stripprefix.prefix=`/hex2cmyk`"
+  
+  hex2hsl:
+    build: ./src/service/hex2hsl/
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.router.hex2hsl.rule=PathPrefix(`/hex2hsl`)"
+      - "traefik.http.router.hex2hsl.middlewares=hex2hsl-sptipperfix"
+      - "traefik.http.router.hex2hsl.loadbalancer.server.port=3000"
+      - "traefik.http.router.hex2hsl-stripprefix.stripprefix.prefix=`/hex2hsl`"
+
+  hex2rgb:
+    build: ./src/service/hex2rgb/
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.router.hex2rgb.rule=PathPrefix(`/hex2rgb`)"
+      - "traefik.http.router.hex2rgb.middlewares=hex2rgb-sptipperfix"
+      - "traefik.http.router.hex2rgb.loadbalancer.server.port=3000"
+      - "traefik.http.router.hex2rgb-stripprefix.stripprefix.prefix=`/hex2rgb`"
+
+  hsl2cmyk:
+    build: ./src/service/hsl2cmyk/
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.router.hsl2cmyk.rule=PathPrefix(`/hsl2cmyk`)"
+      - "traefik.http.router.hsl2cmyk.middlewares=hsl2cmyk-sptipperfix"
+      - "traefik.http.router.hsl2cmyk.loadbalancer.server.port=3000"
+      - "traefik.http.router.hsl2cmyk-stripprefix.stripprefix.prefix=`/hsl2cmyk`"
+
+  hsl2hex:
+    build: ./src/service/hsl2hex/
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.router.hsl2hex.rule=PathPrefix(`/hsl2hex`)"
+      - "traefik.http.router.hsl2hex.middlewares=hsl2hex-sptipperfix"
+      - "traefik.http.router.hsl2hex.loadbalancer.server.port=3000"
+      - "traefik.http.router.hsl2hex-stripprefix.stripprefix.prefix=`/hsl2hex`"
+  
+  hsl2rgb:
+    build: ./src/service/hsl2rgb/
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.router.hsl2rgb.rule=PathPrefix(`/hsl2rgb`)"
+      - "traefik.http.router.hsl2rgb.middlewares=hsl2rgb-sptipperfix"
+      - "traefik.http.router.hsl2rgb.loadbalancer.server.port=3000"
+      - "traefik.http.router.hsl2rgb-stripprefix.stripprefix.prefix=`/hsl2rgb`"
+
+  rgb2cmyk:
+    build: ./src/service/rgb2cmyk/
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.router.rgb2cmyk.rule=PathPrefix(`/rgb2cmyk`)"
+      - "traefik.http.router.rgb2cmyk.middlewares=rgb2cmyk-sptipperfix"
+      - "traefik.http.router.rgb2cmyk.loadbalancer.server.port=3000"
+      - "traefik.http.router.rgb2cmyk-stripprefix.stripprefix.prefix=`/rgb2cmyk`"
+
+  rgb2hsl:
+    build: ./src/service/rgb2hsl/
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.router.rgb2hsl.rule=PathPrefix(`/rgb2hsl`)"
+      - "traefik.http.router.rgb2hsl.middlewares=rgb2hsl-sptipperfix"
+      - "traefik.http.router.rgb2hsl.loadbalancer.server.port=3000"
+      - "traefik.http.router.rgb2hsl-stripprefix.stripprefix.prefix=`/rgb2hsl`"
+
+  rgb2hex:
+    build: ./src/service/rgb2hex/
+    restart: "no"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.router.rgb2hex.rule=PathPrefix(`/rgb2hex`)"
+      - "traefik.http.router.rgb2hex.middlewares=rgb2hex-sptipperfix"
+      - "traefik.http.router.rgb2hex.loadbalancer.server.port=3000"
+      - "traefik.http.router.rgb2hex-stripprefix.stripprefix.prefix=`/rgb2hex`"
+
 #  <microservice-example-name>:
 #    build: <microservice-example-name>
 #    restart: "no"
